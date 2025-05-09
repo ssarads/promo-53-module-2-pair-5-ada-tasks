@@ -13,10 +13,12 @@ const tasks = [
 
 const listTask = document.querySelector (".js_listtask");
 for (const task of tasks) {
-listTask.innerHTML += `<li>${task.name}</li>`;
+listTask.innerHTML += `<li><input type="checkbox" checked="true">${task.name}</li>`;
 }
 
 
-
+listTask.addEventListener('click' , () =>{
+  listTask.classList.toggle('tachado')
+});
 
 
