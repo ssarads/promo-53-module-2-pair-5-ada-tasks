@@ -10,3 +10,13 @@ const tasks = [
     id: 4,
   },
 ];
+
+const listTask = document.querySelector (".js_listtask");
+for (const task of tasks) {
+listTask.innerHTML += `<li>${task.name}</li>`;
+}
+
+
+
+
+
