@@ -60,7 +60,7 @@ const handleClickList = (event) => {
 
 
 
-////// SARA  HACER FILTER   2.11 ---
+////// SARA  HACER FILTER   2.13 ---
 
 const filterBtn = document.querySelector('.js-btn-filter');
 const textFilter = document.querySelector('.js-text-task-filter');
