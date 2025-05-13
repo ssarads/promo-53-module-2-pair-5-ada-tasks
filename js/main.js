@@ -17,14 +17,12 @@ const listTask = document.querySelector(".js_listtask");
 // 2. Ir rellenando con <li>
 for (const task of tasks) {
   console.log(task);
-  
-  if(task.completed === true) {
+
+  if (task.completed === true) {
     listTask.innerHTML += `<li class="js_task tachado"> <input type="checkbox" checked >${task.name}</li>`;
-  }
-  else {
+  } else {
     listTask.innerHTML += `<li class="js_task"> <input type="checkbox"  >${task.name}</li>`;
   }
-
 }
 
 // 3. Traer todos los <li> y ponerles un evento
@@ -58,37 +56,51 @@ const handleClickList = (event) => {
 
 // list.addEventListener("click", handleClickList);
 
-
-
 ////// SARA  HACER FILTER   2.13 ---
 
-const filterBtn = document.querySelector('.js-btn-filter');
-const textFilter = document.querySelector('.js-text-task-filter');
+const filterBtn = document.querySelector(".js-btn-filter");
+const textFilter = document.querySelector(".js-text-task-filter");
 //evento
 //filter
 
-filterBtn.addEventListener ('click',(ev) => {
+filterBtn.addEventListener("click", (ev) => {
   ev.preventDefault();
 
   // 1. Obtén el valor del input de filtrar.
 
-  const textFilter = textFilter.value
+  const textFilter = textFilter.value;
 
   // 2. Filtra las tareas que coinciden con el valor introducido por el usuario.
 
-
-  const completado = tasks.filter((taskObj) => taskObj.completed === textFilter.value); 
-  console.log(completado)
+  const completado = tasks.filter(
+    (taskObj) => taskObj.completed === textFilter.value
+  );
+  console.log(completado);
 
   // 3. Vuelve a pintar las tareas, esta vez utilizando el listado filtrado.
-
-
 });
 
+//// JESSICA
 
-//// JESSICA  
+//// FUNCION GANCHO
+// Ahora vamos a pintar en pantalla todas la tareas que tenemos en el listado. Por cada elemento de la lista, hay que pintar la tarea en el html. ¿Qué utilizamos en JavaScript para realizar una operación por cada elemento de un array? Exacto, un bucle.
 
-//// pendiente gancho  y fetch  26 
+// 1º UN ELEMENTO
+
+const renderOneTask = (task) => {
+  const html = `<li id='idTask'> ${task} </li>`;
+  return html;
+};
+
+// 2º TODOS ELEMENTOS
+
+const renderAllTasks = () => {
+  let html = "";
+  for (const task of tasks) {
+    html += renderOneTask(task);
+  }
+
+  listTask.innerHTML = html;
+};
 
 ///  2.12  PETICIONES SERVIDOR - FETCH
-
