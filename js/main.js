@@ -56,7 +56,39 @@ const handleClickList = (event) => {
   // Pinta de nuevo las tareas en el html
 };
 
-list.addEventListener("click", handleClickList);
+// list.addEventListener("click", handleClickList);
+
+
+
+////// SARA  HACER FILTER   2.11 ---
+
+const filterBtn = document.querySelector('.js-btn-filter');
+const textFilter = document.querySelector('.js-text-task-filter');
+//evento
+//filter
+
+filterBtn.addEventListener ('click',(ev) => {
+  ev.preventDefault();
+
+  // 1. Obtén el valor del input de filtrar.
+
+  const textFilter = textFilter.value
+
+  // 2. Filtra las tareas que coinciden con el valor introducido por el usuario.
+
+
+  const completado = tasks.filter((taskObj) => taskObj.completed === textFilter.value); 
+  console.log(completado)
+
+  // 3. Vuelve a pintar las tareas, esta vez utilizando el listado filtrado.
+
+
+});
+
+
+//// JESSICA  
+
+//// pendiente gancho  y fetch  26 
 
 ///  2.12  PETICIONES SERVIDOR - FETCH
 
