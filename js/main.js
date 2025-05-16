@@ -1,6 +1,6 @@
 "use strict";
 
-let tasks = [
+const tasks = [
   { name: "Recoger setas en el campo", completed: true, id: 1 },
   { name: "Comprar pilas", completed: true, id: 2 },
   { name: "Poner una lavadora de blancos", completed: false, id: 3 },
@@ -56,7 +56,6 @@ const handleClickList = (event) => {
 
 // list.addEventListener("click", handleClickList);
 
-////// SARA  HACER FILTER   2.13 ---
 
 const filterBtn = document.querySelector(".js-btn-filter");
 const textFilter = document.querySelector(".js-text-task-filter");
@@ -80,27 +79,30 @@ filterBtn.addEventListener("click", (ev) => {
   // 3. Vuelve a pintar las tareas, esta vez utilizando el listado filtrado.
 });
 
-//// JESSICA
 
 //// FUNCION GANCHO
 // Ahora vamos a pintar en pantalla todas la tareas que tenemos en el listado. Por cada elemento de la lista, hay que pintar la tarea en el html. ¿Qué utilizamos en JavaScript para realizar una operación por cada elemento de un array? Exacto, un bucle.
 
-// 1º UN ELEMENTO
+listTask.innerHTML = '';
+  for( const oneTask of tasks ) {
 
-const renderOneTask = (task) => {
-  const html = `<li id='idTask'> ${task} </li>`;
-  return html;
-};
+    const li = document.createElement('li');
 
-// 2º TODOS ELEMENTOS
+    const input = document.createElement('input');
+          input.setAttribute('type', 'checkbox');  
 
-const renderAllTasks = () => {
-  let html = "";
-  for (const task of tasks) {
-    html += renderOneTask(task);
-  }
+          input.dataset.taskid = oneTask.id;
+          input.addEventListener('click', handleClickList );
+          li.appendChild(input);
+    
+    const texto = document.createTextNode(oneTask.name);
+          li.appendChild(texto);
+    
 
-  listTask.innerHTML = html;
-};
+    if( oneTask.completed ) {
+      li.classList.add('tachado');
+      input.setAttribute('checked', true);     
+    }
 
-///  2.12  PETICIONES SERVIDOR - FETCH
+    listTask.appendChild(li);
+  };
