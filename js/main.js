@@ -1,29 +1,26 @@
 "use strict";
-
-const tasks = [
-  { name: "Recoger setas en el campo", completed: true, id: 1 },
-  { name: "Comprar pilas", completed: true, id: 2 },
-  { name: "Poner una lavadora de blancos", completed: false, id: 3 },
-  {
-    name: "Aprender cómo se realizan las peticiones al servidor en JavaScript",
-    completed: false,
-    id: 4,
-  },
-];
-
-// 1. Traer el ul del HTML -> JS querySelector
+//1º anotar QuerySelector
 const listTask = document.querySelector(".js_listtask");
 
-// 2. Ir rellenando con <li>
-for (const task of tasks) {
-  console.log(task);
+let tasks = [];
+const GITHUB_USER = "JessicaVR86";
+const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
-  if (task.completed === true) {
-    listTask.innerHTML += `<li class="js_task tachado"> <input type="checkbox" checked >${task.name}</li>`;
-  } else {
-    listTask.innerHTML += `<li class="js_task"> <input type="checkbox"  >${task.name}</li>`;
-  }
-}
+fetch(SERVER_URL)
+  .then((response) => response.json())
+  .then((data) => {
+    tasks = data.results;
+
+    listTask.innerHTML = "";
+
+    for (const task of tasks) {
+      if (task.completed === true) {
+        listTask.innerHTML += `<li class="js_task tachado"> <input type="checkbox" checked >${task.name}</li>`;
+      } else {
+        listTask.innerHTML += `<li class="js_task"> <input type="checkbox"  >${task.name}</li>`;
+      }
+    }
+  });
 
 // 3. Traer todos los <li> y ponerles un evento
 
@@ -56,7 +53,6 @@ const handleClickList = (event) => {
 
 // list.addEventListener("click", handleClickList);
 
-
 const filterBtn = document.querySelector(".js-btn-filter");
 const textFilter = document.querySelector(".js-text-task-filter");
 //evento
@@ -79,30 +75,28 @@ filterBtn.addEventListener("click", (ev) => {
   // 3. Vuelve a pintar las tareas, esta vez utilizando el listado filtrado.
 });
 
-
 //// FUNCION GANCHO
 // Ahora vamos a pintar en pantalla todas la tareas que tenemos en el listado. Por cada elemento de la lista, hay que pintar la tarea en el html. ¿Qué utilizamos en JavaScript para realizar una operación por cada elemento de un array? Exacto, un bucle.
 
-listTask.innerHTML = '';
-  for( const oneTask of tasks ) {
+// listTask.innerHTML = '';
+//   for( const oneTask of tasks ) {
 
-    const li = document.createElement('li');
+//     const li = document.createElement('li');
 
-    const input = document.createElement('input');
-          input.setAttribute('type', 'checkbox');  
+//     const input = document.createElement('input');
+//           input.setAttribute('type', 'checkbox');
 
-          input.dataset.taskid = oneTask.id;
-          input.addEventListener('click', handleClickList );
-          li.appendChild(input);
-    
-    const texto = document.createTextNode(oneTask.name);
-          li.appendChild(texto);
-    
+//           input.dataset.taskid = oneTask.id;
+//           input.addEventListener('click', handleClickList );
+//           li.appendChild(input);
 
-    if( oneTask.completed ) {
-      li.classList.add('tachado');
-      input.setAttribute('checked', true);     
-    }
+//     const texto = document.createTextNode(oneTask.name);
+//           li.appendChild(texto);
 
-    listTask.appendChild(li);
-  };
+//     if( oneTask.completed ) {
+//       li.classList.add('tachado');
+//       input.setAttribute('checked', true);
+//     }
+
+//     listTask.appendChild(li);
+//   };
